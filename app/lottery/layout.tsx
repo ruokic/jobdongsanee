@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: '::: 로또번호 추첨기 :::',
 };

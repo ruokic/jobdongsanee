@@ -4,9 +4,12 @@ import { useState } from 'react';
 import { getSixInFortyFive } from '../lib/lottery';
 
 export default function Lottery() {
-  const [lotteryNumberArray, setLotteryNumberArray] = useState([]);
+  const [lotteryNumberArray, setLotteryNumberArray] = useState<
+    Array<Array<number>>
+  >([]);
   const handleGenerate = () => {
-    setLotteryNumberArray((prev) => prev.concat([getSixInFortyFive()]));
+    const newLotteryNumber = getSixInFortyFive();
+    setLotteryNumberArray((prev) => prev.concat([newLotteryNumber]));
   };
   const handleDeleteAll = () => {
     setLotteryNumberArray([]);
