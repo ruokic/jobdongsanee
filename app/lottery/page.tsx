@@ -2,6 +2,7 @@
 import { useState, useCallback } from 'react';
 
 import Button from '../ui/components/Button';
+import Heading from '../ui/components/Heading';
 
 import { getSixInFortyFive } from '../lib/lottery';
 
@@ -38,7 +39,7 @@ export default function Lottery() {
 
   return (
     <div className='flex flex-col p-4 items-center gap-4'>
-      <h2 className='text-xl'>로또 번호 추첨기</h2>
+      <Heading type='h4' text='로또 번호 추첨기' />
       <div className='w-60 flex justify-between'>
         <Button label='초기화' onClick={handleDeleteAll} warning />
         <Button label='생성' onClick={handleGenerate} primary />
