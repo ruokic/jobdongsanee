@@ -1,6 +1,8 @@
 'use client';
 import { useState, useCallback } from 'react';
 
+import Button from '../ui/components/Button';
+
 import { getSixInFortyFive } from '../lib/lottery';
 
 const bgColorOfNumber = (number) => {
@@ -22,18 +24,6 @@ function LotteryNumberItem({ number }) {
   );
 }
 
-function Button({ text, onClick, ...props }) {
-  return (
-    <button
-      className='px-4 py-2 text-white bg-blue-400 rounded active:bg-blue-600'
-      onClick={onClick}
-      {...props}
-    >
-      {text}
-    </button>
-  );
-}
-
 export default function Lottery() {
   const [lotteryNumberArray, setLotteryNumberArray] = useState<
     Array<Array<number>>
@@ -50,8 +40,8 @@ export default function Lottery() {
     <div className='flex flex-col p-4 items-center gap-4'>
       <h2 className='text-xl'>로또 번호 추첨기</h2>
       <div className='w-60 flex justify-between'>
-        <Button text='초기화' onClick={handleDeleteAll} />
-        <Button text='생성' onClick={handleGenerate} />
+        <Button label='초기화' onClick={handleDeleteAll} warning />
+        <Button label='생성' onClick={handleGenerate} primary />
       </div>
       <div className='flex flex-col gap-2'>
         {lotteryNumberArray.map((lotteryNumber) => (
