@@ -7,7 +7,7 @@ interface ButtonProps {
   warning?: boolean;
   disabled?: boolean;
   isLoading?: boolean;
-  onClick?: (e: Event) => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Button({

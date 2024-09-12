@@ -6,7 +6,7 @@ import Heading from '../ui/components/Heading';
 
 import { getSixInFortyFive } from '../lib/lottery';
 
-const bgColorOfNumber = (number) => {
+const bgColorOfNumber = (number: number) => {
   if (number < 10) return 'bg-yellow-400';
   if (number < 20) return 'bg-sky-400';
   if (number < 30) return 'bg-red-500';
@@ -14,7 +14,7 @@ const bgColorOfNumber = (number) => {
   return 'bg-green-400';
 };
 
-function LotteryNumberItem({ number }) {
+function LotteryNumberItem({ number }: { number: number }) {
   const bgColor = bgColorOfNumber(number);
   return (
     <span
