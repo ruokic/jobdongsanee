@@ -11,6 +11,7 @@ import {
 interface RouletteItemProps {
   index: number;
   content: string;
+  position: number;
   weight: number;
   totalWeight: number;
 }
@@ -24,20 +25,31 @@ interface RouletteProps {
 function RouletteItem({
   index,
   content,
+  position,
   weight,
   totalWeight,
 }: RouletteItemProps) {
-  const transform = `rotate(-${getRotateDegree(0, weight, totalWeight)}deg)`;
+  const containerTransform = `rotate(${getRotateDegree(
+    position,
+    weight,
+    totalWeight
+  )}deg)`;
+  const boardTransform = `rotate(-${getRotateDegree(
+    0,
+    weight,
+    totalWeight
+  )}deg)`;
 
   return (
-    <>
-      <div
-        className='absolute border border-white w-0 origin-bottom z-10'
-        style={{
-          padding: '0 0 calc(50% - 0.1rem) 0',
-          transform,
-        }}
-      />
+    <div
+      className={classNames(
+        'absolute w-60 h-60 rounded-t-full flex justify-center'
+      )}
+      key={content}
+      style={{
+        transform: containerTransform,
+      }}
+    >
       <div
         className={classNames(
           'absolute top-0 left-0 w-60 h-60 rounded-full',
@@ -45,11 +57,11 @@ function RouletteItem({
         )}
         style={{
           clipPath: getPolygonByDegree(weight, totalWeight),
-          transform,
+          transform: boardTransform,
         }}
       />
       <span className='pt-4 z-10'>{content}</span>
-    </>
+    </div>
   );
 }
 
@@ -60,26 +72,14 @@ export default forwardRef(function Roulette(
   return (
     <div ref={ref} className='relative w-60 h-60 flex text-white rounded-full'>
       {data.map(({ content, weight }, index) => (
-        <div
-          className={classNames(
-            'absolute w-60 h-60 rounded-t-full flex justify-center'
-          )}
+        <RouletteItem
           key={content}
-          style={{
-            transform: `rotate(${getRotateDegree(
-              dataPosition[index],
-              weight,
-              totalWeight
-            )}deg)`,
-          }}
-        >
-          <RouletteItem
-            index={index}
-            content={content}
-            weight={weight}
-            totalWeight={totalWeight}
-          />
-        </div>
+          index={index}
+          content={content}
+          position={dataPosition[index]}
+          weight={weight}
+          totalWeight={totalWeight}
+        />
       ))}
     </div>
   );
