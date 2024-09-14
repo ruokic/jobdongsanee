@@ -12,6 +12,7 @@ import {
 
 import Button from '../ui/components/Button';
 import Heading from '../ui/components/Heading';
+import Modal from '../ui/components/Modal';
 
 import Roulette from '../ui/omakase/Roulette';
 
@@ -97,6 +98,10 @@ export default function Omakase() {
     }
   };
 
+  const handleModalClose = () => {
+    setSelectedIndex(null);
+  };
+
   return (
     <div className='flex flex-col p-4 items-center gap-4'>
       <Heading type='h4' text='뭐 먹지???' />
@@ -109,7 +114,7 @@ export default function Omakase() {
       </div>
       <div className='relative p-4 flex justify-center items-center'>
         <div
-          className='absolute w-0 h-0 mx-auto top-0 z-50 rounded'
+          className='absolute w-0 h-0 mx-auto top-0 z-20 rounded'
           style={{
             borderTop: '30px solid red',
             borderLeft: '10px solid transparent',
@@ -123,7 +128,11 @@ export default function Omakase() {
           dataPosition={dataPosition}
         />
       </div>
-      {selectedIndex !== null ? data[selectedIndex].content : ''}
+      {selectedIndex !== null && (
+        <Modal handleClose={handleModalClose}>
+          <div className='text-center'>{data[selectedIndex].content}</div>
+        </Modal>
+      )}
     </div>
   );
 }
