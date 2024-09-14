@@ -7,7 +7,7 @@ export default function Home() {
       <Banner />
       <div className='p-4 flex flex-wrap gap-4 justify-center'>
         <ContentBox title={'로또번호추첨기'} url={'/lottery'} />
-        <ContentBox title={'Content'} url={'/'} />
+        <ContentBox title={'메뉴 추천'} url={'/omakase'} />
         <ContentBox title={'Content'} url={'/'} />
         <ContentBox title={'Content'} url={'/'} />
       </div>
