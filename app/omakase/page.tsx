@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useReducer, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -22,8 +22,44 @@ const initialData = [
   { content: '굶어', weight: 1 },
 ];
 
+type ActionType =
+  | {
+      type: 'add';
+      newContent: string;
+      newWeight: number;
+    }
+  | {
+      type: 'delete';
+      targetContent: string;
+    };
+
+const reducer: Reducer<Array<RouletteDataType>, ActionType> = (
+  data,
+  action
+) => {
+  switch (action.type) {
+    case 'add':
+      const { newContent, newWeight } = action;
+      if (data.some(({ content }) => content === newContent)) {
+        return data.map(({ content, weight }) => {
+          if (content !== newContent) return { content, weight };
+          return { content, weight: weight + newWeight };
+        });
+      }
+      return data.concat({ content: newContent, weight: newWeight });
+    case 'delete':
+      const { targetContent } = action;
+      return data.filter(({ content }) => content !== targetContent);
+    default:
+      return data;
+  }
+  return data;
+};
+
 export default function Omakase() {
-  const [data, setData] = useState<Array<RouletteDataType>>(initialData);
+  const [data, dispatch] = useReducer<
+    React.Reducer<Array<RouletteDataType>, ActionType>
+  >(reducer, initialData);
   const [trigger, setTrigger] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const rouletteRef = useRef<HTMLDivElement>(null);
@@ -34,13 +70,7 @@ export default function Omakase() {
     [0]
   );
 
-  const handleAddSlot = () => {
-    setData((prev) => prev.concat([{ content: '굶어', weight: 1 }]));
-  };
-  const handleDeleteSlot = (targetIndex: number) => {
-    setData((prev) => prev.filter((_, index) => index !== targetIndex));
-  };
-  const handleRoulette = () => {
+  const handleSpinRoulette = () => {
     if (trigger) return;
     const key = Math.random();
     const duration = 5000 + Math.floor(key * 1000);
@@ -57,7 +87,7 @@ export default function Omakase() {
     }, duration);
   };
 
-  const handleRouletteReset = () => {
+  const handleResetRoulette = () => {
     setTrigger(false);
     setSelectedIndex(null);
     clearTimeout(timeoutID.current || '');
@@ -73,7 +103,7 @@ export default function Omakase() {
       <div className='w-60 flex justify-center'>
         <Button
           label={trigger ? '다시하기' : '추첨하기'}
-          onClick={trigger ? handleRouletteReset : handleRoulette}
+          onClick={trigger ? handleResetRoulette : handleSpinRoulette}
           primary
         />
       </div>
