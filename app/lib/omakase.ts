@@ -1,3 +1,8 @@
+export type RouletteDataType = {
+  content: string;
+  weight: number;
+};
+
 const colorSet = [
   'bg-red-500',
   'bg-blue-400',

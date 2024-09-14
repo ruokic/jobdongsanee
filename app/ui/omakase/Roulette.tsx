@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import {
+  type RouletteDataType,
   getBgColorByIndex,
   getRotateDegree,
   getPolygonByDegree,
@@ -17,7 +18,7 @@ interface RouletteItemProps {
 }
 
 interface RouletteProps {
-  data: Array<{ content: string; weight: number }>;
+  data: Array<RouletteDataType>;
   totalWeight: number;
   dataPosition: Array<number>;
 }

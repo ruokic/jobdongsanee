@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import classNames from 'classnames';
 
 import {
+  type RouletteDataType,
   setRotateProperties,
   resetRotateProperties,
   getIndexByDegree,
@@ -13,11 +14,6 @@ import Button from '../ui/components/Button';
 import Heading from '../ui/components/Heading';
 
 import Roulette from '../ui/omakase/Roulette';
-
-type RouletteDataType = {
-  content: string;
-  weight: number;
-};
 
 const initialData = [
   { content: '조이스', weight: 1 },
