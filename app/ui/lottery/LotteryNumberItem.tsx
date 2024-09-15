@@ -21,10 +21,10 @@ export default function LotteryNumberItem({
   const bgColor = bgColorOfNumber(number);
 
   useEffect(() => {
-    const timeoutKey = setTimeout(() => setTrigger(true), index * 50);
+    const timeoutID = setTimeout(() => setTrigger(true), index * 50);
 
     return () => {
-      clearTimeout(timeoutKey);
+      clearTimeout(timeoutID);
     };
   }, [index]);
 
