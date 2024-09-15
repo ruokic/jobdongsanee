@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 interface ModalProps {
-  handleClose: (e) => void;
+  handleClose: () => void;
   children: React.ReactNode;
 }
 
 export default function Modal({ handleClose, children }: ModalProps) {
-  const [portal, setPortal] = useState<HTMLElement | null>(null);
+  const [portal, setPortal] = useState<Element | null>(null);
   useEffect(() => {
-    setPortal(document.querySelector('.modal'));
+    setPortal(document.querySelector('.modal') || null);
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'auto';
