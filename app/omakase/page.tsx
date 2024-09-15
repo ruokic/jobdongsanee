@@ -14,13 +14,18 @@ import Button from '../ui/components/Button';
 import Heading from '../ui/components/Heading';
 import Modal from '../ui/components/Modal';
 
+import DataSetter from '../ui/omakase/DataSetter';
 import Roulette from '../ui/omakase/Roulette';
 
 const initialData = [
-  { content: '조이스', weight: 1 },
-  { content: '호프호프', weight: 1 },
-  { content: '별미', weight: 1 },
-  { content: '굶어', weight: 1 },
+  { content: '파스타', weight: 2 },
+  { content: '돈까스', weight: 2 },
+  { content: '제육', weight: 2 },
+  { content: '초밥', weight: 2 },
+  { content: '칼국수', weight: 1 },
+  { content: '짜장면', weight: 1 },
+  { content: '찌개', weight: 1 },
+  { content: '컵라면', weight: 1 },
 ];
 
 type ActionType =
@@ -32,9 +37,13 @@ type ActionType =
   | {
       type: 'delete';
       targetContent: string;
+    }
+  | {
+      type: 'loadPreset';
+      preset: Array<RouletteDataType>;
     };
 
-const reducer: Reducer<Array<RouletteDataType>, ActionType> = (
+const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
   data,
   action
 ) => {
@@ -51,6 +60,9 @@ const reducer: Reducer<Array<RouletteDataType>, ActionType> = (
     case 'delete':
       const { targetContent } = action;
       return data.filter(({ content }) => content !== targetContent);
+    case 'loadPreset':
+      const { preset } = action;
+      return preset;
     default:
       return data;
   }
@@ -98,6 +110,25 @@ export default function Omakase() {
     }
   };
 
+  const handleAddData = (newContent: string, newWeight: number) => {
+    dispatch({ type: 'add', newContent, newWeight });
+  };
+
+  const handleDeleteData = (targetContent: string) => {
+    dispatch({ type: 'delete', targetContent });
+  };
+
+  const handleSavePreset = () => {
+    localStorage.setItem('omakase_data', JSON.stringify(data));
+  };
+
+  const handleLoadPreset = () => {
+    const preset = localStorage.getItem('omakase_data');
+    if (preset) {
+      dispatch({ type: 'loadPreset', preset: JSON.parse(preset) });
+    }
+  };
+
   const handleModalClose = () => {
     setSelectedIndex(null);
   };
@@ -127,6 +158,15 @@ export default function Omakase() {
           totalWeight={totalWeight}
           dataPosition={dataPosition}
         />
+      </div>
+      <DataSetter
+        data={data}
+        handleAddData={handleAddData}
+        handleDeleteData={handleDeleteData}
+      />
+      <div className='flex justify-center gap-2'>
+        <Button label='프리셋 저장' onClick={handleSavePreset} primary />
+        <Button label='프리셋 로드' onClick={handleLoadPreset} primary />
       </div>
       {selectedIndex !== null && (
         <Modal handleClose={handleModalClose}>
