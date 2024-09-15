@@ -143,7 +143,7 @@ export default function Omakase() {
           primary
         />
       </div>
-      <div className='relative p-4 flex justify-center items-center'>
+      <div className='relative p-4 flex justify-center items-center overflow-hidden'>
         <div
           className='absolute w-0 h-0 mx-auto top-0 z-20 rounded'
           style={{

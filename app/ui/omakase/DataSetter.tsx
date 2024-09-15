@@ -39,7 +39,7 @@ export default function DataSetter({
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex justify-center gap-2'>
+      <div className='flex justify-center p-2 gap-2 rounded shadow'>
         <input
           ref={contentInputRef}
           className='px-2 w-32'
@@ -67,11 +67,8 @@ export default function DataSetter({
             key={content}
             className='grid grid-cols-6 items-center gap-4 p-2 w-full rounded shadow'
           >
-            <button
-              className='w-6 h-6 text-red-500'
-              onClick={() => handleClickDelete(content)}
-            >
-              <MinusCircleIcon />
+            <button onClick={() => handleClickDelete(content)}>
+              <MinusCircleIcon className='fill-red-500 w-4 h-4' />
             </button>
 
             <span className='col-span-4'>{content}</span>

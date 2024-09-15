@@ -24,7 +24,7 @@ export default function Lottery() {
 
   return (
     <div className='flex flex-col p-4 items-center gap-4'>
-      <Heading type='h4' text='로또 번호 추첨기' />
+      <Heading type='h4' text='로또 번호 추천' />
       <div className='w-60 flex justify-between'>
         <Button label='초기화' onClick={handleDeleteAll} warning />
         <Button label='생성' onClick={handleGenerate} primary />

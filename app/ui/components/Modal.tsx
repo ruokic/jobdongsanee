@@ -19,7 +19,7 @@ export default function Modal({ handleClose, children }: ModalProps) {
   return createPortal(
     <div
       onClick={handleClose}
-      className='absolute inset-0 w-screen h-screen flex flex-col justify-center items-center bg-black/50 z-50 overflow-auto'
+      className='fixed inset-0 w-screen h-screen flex flex-col justify-center items-center bg-black/50 z-50 overflow-hidden'
     >
       <div
         onClick={(e: React.MouseEvent<HTMLDivElement>) => {
