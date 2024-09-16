@@ -8,14 +8,14 @@ import {
   setRotateProperties,
   resetRotateProperties,
   getIndexByDegree,
-} from '../lib/omakase';
+} from '@lib/omakase';
 
-import Button from '../ui/components/Button';
-import Heading from '../ui/components/Heading';
-import Modal from '../ui/components/Modal';
+import Button from '@components/Button';
+import Heading from '@components/Heading';
+import Modal from '@components/Modal';
 
-import DataSetter from '../ui/omakase/DataSetter';
-import Roulette from '../ui/omakase/Roulette';
+import DataSetter from '@ui/omakase/DataSetter';
+import Roulette from '@ui/omakase/Roulette';
 
 const initialData = [
   { content: '파스타', weight: 2 },

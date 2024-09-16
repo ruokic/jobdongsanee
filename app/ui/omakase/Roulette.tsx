@@ -7,7 +7,7 @@ import {
   getBgColorByIndex,
   getRotateDegree,
   getPolygonByDegree,
-} from '../../lib/omakase';
+} from '@lib/omakase';
 
 interface RouletteItemProps {
   index: number;

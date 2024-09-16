@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
-import { type RouletteDataType } from '../../lib/omakase';
+import { type RouletteDataType } from '@lib/omakase';
 
-import Button from '../../ui/components/Button';
+import Button from '@components/Button';
 
-import MinusCircleIcon from '../../../public/icons/minus-circle.svg';
+import MinusCircleIcon from '@icons/minus-circle.svg';
 
 interface DataSetterProps {
   data: Array<RouletteDataType>;

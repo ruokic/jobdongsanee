@@ -3,12 +3,12 @@ import { useState } from 'react';
 
 import classNames from 'classnames';
 
-import Button from '../ui/components/Button';
-import Heading from '../ui/components/Heading';
+import Button from '@components/Button';
+import Heading from '@components/Heading';
 
-import LotteryNumberItem from '../ui/lottery/LotteryNumberItem';
+import LotteryNumberItem from '@ui/lottery/LotteryNumberItem';
 
-import { getSixInFortyFive } from '../lib/lottery';
+import { getSixInFortyFive } from '@lib/lottery';
 
 export default function Lottery() {
   const [lotteryNumberArray, setLotteryNumberArray] = useState<
