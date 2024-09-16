@@ -19,12 +19,12 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@app/*": ["app/*"],
-      "@lib/*": ["app/lib/*"],
-      "@ui/*": ["app/ui/*"],
-      "@components/*": ["app/ui/components/*"],
-      "@public/*": ["public/*"],
-      "@icons/*": ["public/icons/*"]
+      "@app/*": ["./app/*"],
+      "@lib/*": ["./app/lib/*"],
+      "@ui/*": ["./app/ui/*"],
+      "@components/*": ["./app/ui/components/*"],
+      "@public/*": ["./public/*"],
+      "@icons/*": ["./public/icons/*"]
     },
     "target": "es2015"
   },
