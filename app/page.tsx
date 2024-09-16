@@ -1,4 +1,3 @@
-'use client';
 import ContentBox from './ui/home/ContentBox';
 import Banner from './ui/home/Banner';
 
