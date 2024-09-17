@@ -21,6 +21,8 @@ export default function DataSetter({
   const weightInputRef = useRef<HTMLSelectElement>(null);
 
   const handleClickAdd = () => {
+    if (!contentInputRef.current?.value || !weightInputRef.current?.value)
+      return;
     handleAddData(
       contentInputRef.current.value,
       Number(weightInputRef.current.value)
