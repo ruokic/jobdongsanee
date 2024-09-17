@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
-import { type RouletteDataType } from '../../lib/omakase';
+import { type RouletteDataType } from '@lib/omakase';
 
-import Button from '../../ui/components/Button';
+import Button from '@components/Button';
 
-import MinusCircleIcon from '../../../public/icons/minus-circle.svg';
+import MinusCircleIcon from '@icons/minus-circle.svg';
 
 interface DataSetterProps {
   data: Array<RouletteDataType>;
@@ -21,8 +21,9 @@ export default function DataSetter({
   const weightInputRef = useRef<HTMLSelectElement | null>(null);
 
   const handleClickAdd = () => {
-    if (!contentInputRef.current?.value || !weightInputRef.current?.value)
+    if (!contentInputRef.current?.value || !weightInputRef.current?.value) {
       return;
+    }
     handleAddData(
       contentInputRef.current.value,
       Number(weightInputRef.current.value)
@@ -67,10 +68,13 @@ export default function DataSetter({
             key={content}
             className='grid grid-cols-6 items-center gap-4 p-2 w-full rounded shadow'
           >
-            <button onClick={() => handleClickDelete(content)}>
+            <button
+              type='button'
+              onClick={() => handleClickDelete(content)}
+              aria-label='delete'
+            >
               <MinusCircleIcon className='fill-red-500 w-4 h-4' />
             </button>
-
             <span className='col-span-4'>{content}</span>
             <span>{weight}</span>
           </div>

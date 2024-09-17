@@ -2,13 +2,7 @@ import { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 
-const bgColorOfNumber = (number: number) => {
-  if (number < 10) return 'bg-yellow-400';
-  if (number < 20) return 'bg-sky-400';
-  if (number < 30) return 'bg-red-500';
-  if (number < 40) return 'bg-gray-400';
-  return 'bg-green-400';
-};
+import { getBgColorByNumber } from '@lib/lottery';
 
 export default function LotteryNumberItem({
   number,
@@ -18,7 +12,7 @@ export default function LotteryNumberItem({
   index: number;
 }) {
   const [trigger, setTrigger] = useState(false);
-  const bgColor = bgColorOfNumber(number);
+  const bgColor = getBgColorByNumber(number);
 
   useEffect(() => {
     const timeoutID = setTimeout(() => setTrigger(true), index * 50);

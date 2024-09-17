@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import {
   getBgColorByIndex,
   getRotateDegree,
   getPolygonByDegree,
-} from '../../lib/omakase';
+} from '@lib/omakase';
 
 interface RouletteItemProps {
   index: number;
@@ -66,7 +66,7 @@ function RouletteItem({
   );
 }
 
-export default forwardRef(function Roulette(
+function Roulette(
   { data, totalWeight, dataPosition }: RouletteProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
@@ -84,4 +84,6 @@ export default forwardRef(function Roulette(
       ))}
     </div>
   );
-});
+}
+
+export default forwardRef(Roulette);

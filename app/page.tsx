@@ -1,9 +1,8 @@
-'use client';
-import ContentBox from './ui/home/ContentBox';
-import Banner from './ui/home/Banner';
+import ContentBox from '@ui/home/ContentBox';
+import Banner from '@ui/home/Banner';
 
-import CloverIcon from '../public/icons/clover.svg';
-import UtensilsIcon from '../public/icons/utensils.svg';
+import CloverIcon from '@icons/clover.svg';
+import UtensilsIcon from '@icons/utensils.svg';
 
 const data = [
   {

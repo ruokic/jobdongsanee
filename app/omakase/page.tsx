@@ -1,21 +1,20 @@
 'use client';
-import { useState, useReducer, useRef } from 'react';
 
-import classNames from 'classnames';
+import React, { useState, useReducer, useRef } from 'react';
 
 import {
   type RouletteDataType,
   setRotateProperties,
   resetRotateProperties,
   getIndexByDegree,
-} from '../lib/omakase';
+} from '@lib/omakase';
 
-import Button from '../ui/components/Button';
-import Heading from '../ui/components/Heading';
-import Modal from '../ui/components/Modal';
+import Button from '@components/Button';
+import Heading from '@components/Heading';
+import Modal from '@components/Modal';
 
-import DataSetter from '../ui/omakase/DataSetter';
-import Roulette from '../ui/omakase/Roulette';
+import DataSetter from '@ui/omakase/DataSetter';
+import Roulette from '@ui/omakase/Roulette';
 
 const initialData = [
   { content: '파스타', weight: 2 },
@@ -48,7 +47,7 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
   action
 ) => {
   switch (action.type) {
-    case 'add':
+    case 'add': {
       const { newContent, newWeight } = action;
       if (data.some(({ content }) => content === newContent)) {
         return data.map(({ content, weight }) => {
@@ -57,16 +56,18 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
         });
       }
       return data.concat({ content: newContent, weight: newWeight });
-    case 'delete':
+    }
+    case 'delete': {
       const { targetContent } = action;
       return data.filter(({ content }) => content !== targetContent);
-    case 'loadPreset':
+    }
+    case 'loadPreset': {
       const { preset } = action;
       return preset;
+    }
     default:
       return data;
   }
-  return data;
 };
 
 export default function Omakase() {
