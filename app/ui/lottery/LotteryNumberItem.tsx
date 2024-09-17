@@ -4,15 +4,16 @@ import classNames from 'classnames';
 
 import { getBgColorByNumber } from '@lib/lottery';
 
+interface LotteryNumberItemProps {
+  number: number;
+  index: number;
+}
+
 export default function LotteryNumberItem({
   number,
   index,
-}: {
-  number: number;
-  index: number;
-}) {
+}: LotteryNumberItemProps) {
   const [trigger, setTrigger] = useState(false);
-  const bgColor = getBgColorByNumber(number);
 
   useEffect(() => {
     const timeoutID = setTimeout(() => setTrigger(true), index * 50);
@@ -30,7 +31,7 @@ export default function LotteryNumberItem({
           '-translate-x-1 opacity-0': !trigger,
           'translate-x-0 opacity-100': trigger,
         },
-        bgColor
+        getBgColorByNumber(number)
       )}
     >
       {number}

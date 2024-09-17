@@ -4,7 +4,7 @@ import { type RouletteDataType } from '@lib/omakase';
 
 import Button from '@components/Button';
 
-import MinusCircleIcon from '@icons/minus-circle.svg';
+import DataItem from '@ui/omakase/DataItem';
 
 interface DataSetterProps {
   data: Array<RouletteDataType>;
@@ -17,13 +17,10 @@ export default function DataSetter({
   handleAddData,
   handleDeleteData,
 }: DataSetterProps) {
-  const contentInputRef = useRef<HTMLInputElement | null>(null);
-  const weightInputRef = useRef<HTMLSelectElement | null>(null);
+  const contentInputRef = useRef<HTMLInputElement>(null);
+  const weightInputRef = useRef<HTMLSelectElement>(null);
 
   const handleClickAdd = () => {
-    if (!contentInputRef.current?.value || !weightInputRef.current?.value) {
-      return;
-    }
     handleAddData(
       contentInputRef.current.value,
       Number(weightInputRef.current.value)
@@ -31,11 +28,6 @@ export default function DataSetter({
     contentInputRef.current.value = '';
     weightInputRef.current.value = '1';
     contentInputRef.current.focus();
-  };
-
-  const handleClickDelete = (targetContent: string) => {
-    if (data.length < 3) return;
-    handleDeleteData(targetContent);
   };
 
   return (
@@ -64,20 +56,12 @@ export default function DataSetter({
       </div>
       <div className='flex flex-col gap-2 w-full'>
         {data.map(({ content, weight }) => (
-          <div
+          <DataItem
             key={content}
-            className='grid grid-cols-6 items-center gap-4 p-2 w-full rounded shadow'
-          >
-            <button
-              type='button'
-              onClick={() => handleClickDelete(content)}
-              aria-label='delete'
-            >
-              <MinusCircleIcon className='fill-red-500 w-4 h-4' />
-            </button>
-            <span className='col-span-4'>{content}</span>
-            <span>{weight}</span>
-          </div>
+            content={content}
+            weight={weight}
+            handleDeleteData={handleDeleteData}
+          />
         ))}
       </div>
     </div>
