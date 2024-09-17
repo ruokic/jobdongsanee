@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '::: 잡동사니 도구 모음 :::',
-  description: '뭐가 필요할지 몰라서 다 준비해봤어, 니가 원하는 것은 빼고',
+  description: '쓸모 없는 것도 언젠간 쓸 데가 있다',
 };
 
 export default function RootLayout({
