@@ -3,7 +3,7 @@ export type RouletteDataType = {
   weight: number;
 };
 
-const colorSet = [
+const bgColor = [
   'bg-red-500',
   'bg-blue-400',
   'bg-yellow-400',
@@ -12,9 +12,7 @@ const colorSet = [
   'bg-green-400',
 ] as const;
 
-export const getBgColorByIndex = (index: number) => {
-  return colorSet[index % colorSet.length];
-};
+export const getBgColorByIndex = (idx: number) => bgColor[idx % bgColor.length];
 
 export const setRotateProperties = (
   target: HTMLDivElement | null,
@@ -51,9 +49,9 @@ export const getIndexByDegree = (
   totalWeight: number,
   dataRotatePosition: Array<number>
 ) => {
-  const weightIndex =
-    Math.floor(((360 - (degree % 360)) / 360) * totalWeight) % totalWeight;
-  for (let i = 0; i < dataRotatePosition.length; i++) {
+  const reversedDegree = 360 - (degree % 360);
+  const weightIndex = Math.floor((reversedDegree / 360) * totalWeight);
+  for (let i = 0; i < dataRotatePosition.length; i += 1) {
     if (weightIndex < dataRotatePosition[i + 1]) return i;
   }
   return null;

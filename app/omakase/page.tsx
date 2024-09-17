@@ -1,7 +1,6 @@
 'use client';
-import { useState, useReducer, useRef } from 'react';
 
-import classNames from 'classnames';
+import React, { useState, useReducer, useRef } from 'react';
 
 import {
   type RouletteDataType,
@@ -48,7 +47,7 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
   action
 ) => {
   switch (action.type) {
-    case 'add':
+    case 'add': {
       const { newContent, newWeight } = action;
       if (data.some(({ content }) => content === newContent)) {
         return data.map(({ content, weight }) => {
@@ -57,16 +56,18 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
         });
       }
       return data.concat({ content: newContent, weight: newWeight });
-    case 'delete':
+    }
+    case 'delete': {
       const { targetContent } = action;
       return data.filter(({ content }) => content !== targetContent);
-    case 'loadPreset':
+    }
+    case 'loadPreset': {
       const { preset } = action;
       return preset;
+    }
     default:
       return data;
   }
-  return data;
 };
 
 export default function Omakase() {

@@ -1,7 +1,6 @@
 'use client';
-import { useState } from 'react';
 
-import classNames from 'classnames';
+import { useState } from 'react';
 
 import Button from '@components/Button';
 import Heading from '@components/Heading';
