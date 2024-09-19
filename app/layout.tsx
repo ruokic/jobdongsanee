@@ -23,6 +23,7 @@ export default function RootLayout({
         <Header />
         <main className='flex flex-col gap-4 items-center'>{children}</main>
         <div className='modal' />
+        <div className='toast-container fixed top-0 inset-x-0 flex flex-col items-center gap-1' />
       </body>
     </html>
   );
