@@ -13,11 +13,16 @@ export default function useModal() {
 
   useEffect(() => {
     setPortal(document.querySelector('.modal') || null);
-    document.body.style.overflow = 'hidden';
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [isOpen]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -25,6 +30,7 @@ export default function useModal() {
 
   const closeModal = () => {
     setIsOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   function Modal({ contents }: ModalProps) {
