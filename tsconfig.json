@@ -21,6 +21,7 @@
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
       "@lib/*": ["./app/lib/*"],
+      "@hooks/*": ["./app/lib/hooks/*"],
       "@ui/*": ["./app/ui/*"],
       "@components/*": ["./app/ui/components/*"],
       "@public/*": ["./public/*"],

@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["airbnb", "airbnb/hooks", "next/core-web-vitals"],
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "next/core-web-vitals"],
   "plugins": ["@typescript-eslint"],
   "rules": {
     "comma-dangle": "off",

@@ -41,7 +41,7 @@ export const getRotateDegree = (
 ) => {
   const offset = (360 / (totalWeight * 2)) * weight;
   const deg = offset + index * (360 / totalWeight);
-  return deg;
+  return `rotate(${deg}deg)`;
 };
 
 export const getIndexByDegree = (
