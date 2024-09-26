@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "next/core-web-vitals"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "comma-dangle": "off",
+    "jsx-quotes": "off",
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-unused-vars": "error"
+  }
 }

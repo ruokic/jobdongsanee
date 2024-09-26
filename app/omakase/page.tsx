@@ -1,21 +1,21 @@
 'use client';
-import { useState, useReducer, useRef } from 'react';
 
-import classNames from 'classnames';
+import React, { useState, useReducer, useRef } from 'react';
+
+import useModal from '@lib/hooks/useModal';
 
 import {
   type RouletteDataType,
   setRotateProperties,
   resetRotateProperties,
   getIndexByDegree,
-} from '../lib/omakase';
+} from '@lib/omakase';
 
-import Button from '../ui/components/Button';
-import Heading from '../ui/components/Heading';
-import Modal from '../ui/components/Modal';
+import Button from '@components/Button';
+import Heading from '@components/Heading';
 
-import DataSetter from '../ui/omakase/DataSetter';
-import Roulette from '../ui/omakase/Roulette';
+import DataSetter from '@ui/omakase/DataSetter';
+import Roulette from '@ui/omakase/Roulette';
 
 const initialData = [
   { content: '파스타', weight: 2 },
@@ -48,7 +48,7 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
   action
 ) => {
   switch (action.type) {
-    case 'add':
+    case 'add': {
       const { newContent, newWeight } = action;
       if (data.some(({ content }) => content === newContent)) {
         return data.map(({ content, weight }) => {
@@ -57,16 +57,18 @@ const reducer: React.Reducer<Array<RouletteDataType>, ActionType> = (
         });
       }
       return data.concat({ content: newContent, weight: newWeight });
-    case 'delete':
+    }
+    case 'delete': {
       const { targetContent } = action;
       return data.filter(({ content }) => content !== targetContent);
-    case 'loadPreset':
+    }
+    case 'loadPreset': {
       const { preset } = action;
       return preset;
+    }
     default:
       return data;
   }
-  return data;
 };
 
 export default function Omakase() {
@@ -77,6 +79,7 @@ export default function Omakase() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const rouletteRef = useRef<HTMLDivElement>(null);
   const timeoutID = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { Modal, openModal, closeModal } = useModal();
   const totalWeight = data.reduce((acc, { weight }) => acc + weight, 0);
   const dataPosition = data.reduce(
     (acc, { weight }) => acc.concat((acc.at(-1) || 0) + weight),
@@ -97,6 +100,7 @@ export default function Omakase() {
 
     timeoutID.current = setTimeout(() => {
       setSelectedIndex(getIndexByDegree(degree, totalWeight, dataPosition));
+      openModal();
     }, duration);
   };
 
@@ -104,6 +108,7 @@ export default function Omakase() {
     setTrigger(false);
     setSelectedIndex(null);
     clearTimeout(timeoutID.current || '');
+    closeModal();
 
     if (rouletteRef.current) {
       resetRotateProperties(rouletteRef.current);
@@ -127,10 +132,6 @@ export default function Omakase() {
     if (preset) {
       dispatch({ type: 'loadPreset', preset: JSON.parse(preset) });
     }
-  };
-
-  const handleModalClose = () => {
-    setSelectedIndex(null);
   };
 
   return (
@@ -168,11 +169,13 @@ export default function Omakase() {
         <Button label='프리셋 저장' onClick={handleSavePreset} primary />
         <Button label='프리셋 로드' onClick={handleLoadPreset} primary />
       </div>
-      {selectedIndex !== null && (
-        <Modal handleClose={handleModalClose}>
-          <div className='text-center'>{data[selectedIndex].content}</div>
-        </Modal>
-      )}
+      <Modal
+        contents={
+          <div className='text-center'>
+            <Heading type='h3' text={data[selectedIndex ?? -1]?.content} />
+          </div>
+        }
+      />
     </div>
   );
 }

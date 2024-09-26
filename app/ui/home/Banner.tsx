@@ -1,6 +1,6 @@
-import Heading from '../components/Heading';
+import Heading from '@components/Heading';
 
-import MugHotIcon from '../../../public/icons/mug-hot.svg';
+import MugHotIcon from '@icons/mug-hot.svg';
 
 export default function Banner() {
   return (

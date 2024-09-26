@@ -1,10 +1,16 @@
 import Link from 'next/link';
 
+import HouseIcon from '@icons/house.svg';
+
+import MenuDropdown from '@ui/header/MenuDropdown';
+
 export default function Header() {
   return (
-    <header className='flex justify-between align-center p-4 shadow'>
-      <Link href='/'>J10E</Link>
-      <div>menu</div>
+    <header className='flex justify-between items-center p-4 shadow bg-sky-300 text-white'>
+      <Link href='/'>
+        <HouseIcon className='w-6 h-6 fill-white' />
+      </Link>
+      <MenuDropdown />
     </header>
   );
 }

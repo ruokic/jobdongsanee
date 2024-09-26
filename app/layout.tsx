@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
+import React from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import Header from './ui/header/Header';
+import Header from '@ui/header/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '::: 잡동사니 도구 모음 :::',
-  description: '뭐가 필요할지 몰라서 다 준비해봤어, 니가 원하는 것은 빼고',
+  description: '쓸모 없는 것도 언젠간 쓸 데가 있다',
 };
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Header />
         <main className='flex flex-col gap-4 items-center'>{children}</main>
         <div className='modal' />
+        <div className='toast-container fixed top-0 inset-x-0 flex flex-col items-center gap-1' />
       </body>
     </html>
   );

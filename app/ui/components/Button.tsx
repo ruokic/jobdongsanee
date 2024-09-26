@@ -1,3 +1,5 @@
+import React from 'react';
+
 import classNames from 'classnames';
 
 interface ButtonProps {
@@ -36,6 +38,7 @@ export default function Button({
         }
       )}
       onClick={onClick}
+      disabled={disabled || isLoading}
     >
       {label}
     </button>
